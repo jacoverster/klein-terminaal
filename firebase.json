@@ -1,0 +1,15 @@
+{
+	"hosting": {
+		"cleanUrls": true,
+		"public": ".",
+		"ignore": [
+			".firebase/",
+			".gitignore",
+			"firebase.json",
+			"LICENCE",
+			"README.md",
+			"og.png",
+			"social-preview.png"
+		]
+	}
+}

@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="af">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Klein Terminaal 🖥️ — 'n Sleutelbord-speelplek vir kinders</title>
-<meta name="description" content="'n Enkelbladsy-terminaal vir kinders om op die sleutelbord te tik, leer tik, en soos 'n hacker te voel. Geen advertensies, geen dop, geen rekening nodig. Gemaak deur Mei Park.">
+<title>Tiny Terminal 🖥️ — A keyboard playground for kids</title>
+<meta name="description" content="A single-page terminal for kids to bang on the keyboard, learn typing, and feel like a hacker. No ads, no tracking, no account required. Built by Mei Park.">
 <meta name="author" content="Mei Park">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Klein Terminaal — 'n Sleutelbord-speelplek vir kinders">
-<meta property="og:description" content="'n Enkelbladsy-terminaal vir kinders om op die sleutelbord te tik, leer tik, en soos 'n hacker te voel. Geen advertensies, geen dop, geen rekening nodig.">
+<meta property="og:title" content="Tiny Terminal — A keyboard playground for kids">
+<meta property="og:description" content="A single-page terminal for kids to bang on the keyboard, learn typing, and feel like a hacker. No ads, no tracking, no account required.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://tiny-terminal.com/af/">
+<meta property="og:url" content="https://tiny-terminal.com">
 <meta property="og:image" content="https://tiny-terminal.com/og.png">
-<meta property="og:site_name" content="Klein Terminaal">
+<meta property="og:site_name" content="Tiny Terminal">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@meimakes">
-<meta name="twitter:title" content="Klein Terminaal — 'n Sleutelbord-speelplek vir kinders">
-<meta name="twitter:description" content="'n Enkelbladsy-terminaal vir kinders om op die sleutelbord te tik, leer tik, en soos 'n hacker te voel. Geen advertensies, geen dop, geen rekening nodig.">
+<meta name="twitter:title" content="Tiny Terminal — A keyboard playground for kids">
+<meta name="twitter:description" content="A single-page terminal for kids to bang on the keyboard, learn typing, and feel like a hacker. No ads, no tracking, no account required.">
 <meta name="twitter:image" content="https://tiny-terminal.com/og.png">
 
-<link rel="canonical" href="https://tiny-terminal.com/af/">
+<link rel="canonical" href="https://tiny-terminal.com">
 
 <!-- Privacy-friendly analytics by Plausible -->
 <script async src="https://plausible.io/js/pa-DhMEzmtaH0fhY3PWgKjXO.js"></script>
@@ -172,7 +172,7 @@
     <div class="dot yellow"></div>
     <div class="dot green"></div>
   </div>
-  <div class="title">klein terminaal</div>
+  <div class="title">tiny terminal</div>
 </div>
 
 <div class="terminal" id="terminal">
@@ -181,6 +181,8 @@
 <script>
 (function() {
   const t = document.getElementById('terminal');
+  const animalKeys = Object.keys(window._animals || {});
+  // Will be populated after animals object is defined
   window._showWelcome = function() {
     const emoji = ['🚀','🦕','🐱','🔥','⭐','🌈','💎','🎸','🦞','🐙','🎪','🌸','🍕','🎯','🐋','🦋','🌊','🎵','🍭','🐲','👾','🪐','🦈','🌻','🎨','🐸','🏀','🦄','🎃','🐧'];
     let row = '';
@@ -202,110 +204,87 @@ let pendingChallenge = null;
 const allEmoji = ['🚀','🦕','🐱','🔥','⭐','🌈','💎','🎸','🦞','🐙','🎪','🌸','🍕','🎯','🐋','🦋','🌊','🎵','🍭','🐲','👾','🪐','🦈','🌻','🎨','🐸','🏀','🧲','🦄','🎃','🐧','🎺','🌮','🦊','🔮','🎠','🐢','⚡','🍩','🎈'];
 
 const animals = {
-  'kat':        { emoji: '🐱', art: '  /\\_/\\\n ( o.o )\n  > ^ <', sound: 'Miaau!' },
-  'hond':       { emoji: '🐶', art: '  / \\__\n (    @\\___\n  /         O\n /   (_____/\n/_____/', sound: 'Woef woef!' },
-  'vis':        { emoji: '🐟', art: '  ><(((°>', sound: 'Blub blub!' },
-  'voël':       { emoji: '🐦', art: '   ,_,\n  (O,O)\n  /)  )\n --"-"--', sound: 'Tjilp tjilp!' },
-  'slang':      { emoji: '🐍', art: '  ~~~~~sssss\n /     \\\n|  o  o |\n \\  ~  /', sound: 'Ssssss!' },
-  'padda':      { emoji: '🐸', art: '  @..@\n (----)\n( >__< )', sound: 'Kwaak!' },
-  'koei':       { emoji: '🐄', art: '  (___)\n  (o o)\n /  |  \\', sound: 'Moeoe!' },
-  'vark':       { emoji: '🐷', art: '  ^  ^\n (o  o)\n  (oo)', sound: 'Knor knor!' },
-  'eend':       { emoji: '🦆', art: '    _\n  <(o )___\n   ( ._> /\n    `---\'', sound: 'Kwak kwak!' },
-  'haai':       { emoji: '🦈', art: '     |\\\n     |  \\\n     |   \\______\n ~~~~|          |~~~~\n     |   /------\n     |  /', sound: 'Dun dun...' },
-  'dinosaurus': { emoji: '🦕', art: '            __\n           / _)\n    _.----._/ /\n   /         /\n _/ (  | (  |\n/__.-\'|_|--|_|', sound: 'BRUL!' },
-  'kreef':      { emoji: '🦞', art: ' \\/\\_/\\_/\\/\n  \\_   _/\n  (|o o|)\n   |   |\n  /|   |\\', sound: 'Kliek kliek!' },
-  'olifant':    { emoji: '🐘', art: '    ___\n   /   \\\n  | o o |\n   \\   /----,\n    | |      \\', sound: 'PRRRT!' },
-  'aap':        { emoji: '🐵', art: '  .-"-.  \n /  o o \\\n|   <   |\n \\  ~  /', sound: 'Oe oe aa aa!' },
-  'beer':       { emoji: '🐻', art: ' ʕ •ᴥ• ʔ', sound: 'Grrr!' },
-  'hasie':      { emoji: '🐰', art: ' (\\_/)\n ( •.•)\n />🥕', sound: 'Hop hop!' },
-  'uil':        { emoji: '🦉', art: '  ,_,\n (O,O)\n(  V  )\n  ^ ^', sound: 'Hoe hoe!' },
-  'skilpad':    { emoji: '🐢', art: '    _____\n  .\'     `.\n /  o   o  \\\n|     <     |\n \\  \\___/  /\n  `._____,\'', sound: 'Stadig en gestadig!' },
-  'pikkewyn':   { emoji: '🐧', art: '   (o)\n  /| |\\\n _| | |_', sound: 'Waggel waggel!' },
-  'leeu':       { emoji: '🦁', art: '  /----- \\\n /  o   o  \\\n|    <>    |\n \\  ____  /\n  \\ \\  / /', sound: 'BRUL!' },
+  'cat':       { emoji: '🐱', art: '  /\\_/\\\n ( o.o )\n  > ^ <', sound: 'Meow!' },
+  'dog':       { emoji: '🐶', art: '  / \\__\n (    @\\___\n  /         O\n /   (_____/\n/_____/', sound: 'Woof woof!' },
+  'fish':      { emoji: '🐟', art: '  ><(((°>', sound: 'Blub blub!' },
+  'bird':      { emoji: '🐦', art: '   ,_,\n  (O,O)\n  /)  )\n --"-"--', sound: 'Tweet tweet!' },
+  'snake':     { emoji: '🐍', art: '  ~~~~~sssss\n /     \\\n|  o  o |\n \\  ~  /', sound: 'Hissssss!' },
+  'frog':      { emoji: '🐸', art: '  @..@\n (----)\n( >__< )', sound: 'Ribbit!' },
+  'cow':       { emoji: '🐄', art: '  (___)\n  (o o)\n /  |  \\', sound: 'Mooooo!' },
+  'pig':       { emoji: '🐷', art: '  ^  ^\n (o  o)\n  (oo)', sound: 'Oink oink!' },
+  'duck':      { emoji: '🦆', art: '    _\n  <(o )___\n   ( ._> /\n    `---\'', sound: 'Quack quack!' },
+  'shark':     { emoji: '🦈', art: '     |\\\n     |  \\\n     |   \\______\n ~~~~|          |~~~~\n     |   /------\n     |  /', sound: 'Dun dun...' },
+  'dinosaur':  { emoji: '🦕', art: '            __\n           / _)\n    _.----._/ /\n   /         /\n _/ (  | (  |\n/__.-\'|_|--|_|', sound: 'ROARRR!' },
+  'lobster':   { emoji: '🦞', art: ' \\/\\_/\\_/\\/\n  \\_   _/\n  (|o o|)\n   |   |\n  /|   |\\', sound: 'Click click!' },
+  'elephant':  { emoji: '🐘', art: '    ___\n   /   \\\n  | o o |\n   \\   /----,\n    | |      \\', sound: 'PHHHRRRRT!' },
+  'monkey':    { emoji: '🐵', art: '  .-"-.  \n /  o o \\\n|   <   |\n \\  ~  /', sound: 'Ooh ooh aah aah!' },
+  'bear':      { emoji: '🐻', art: ' ʕ •ᴥ• ʔ', sound: 'Grrr!' },
+  'rabbit':    { emoji: '🐰', art: ' (\\_/)\n ( •.•)\n />🥕', sound: 'Hop hop!' },
+  'owl':       { emoji: '🦉', art: '  ,_,\n (O,O)\n(  V  )\n  ^ ^', sound: 'Hoo hoo!' },
+  'turtle':    { emoji: '🐢', art: '    _____\n  .\'     `.\n /  o   o  \\\n|     <     |\n \\  \\___/  /\n  `._____,\'', sound: 'Slow and steady!' },
+  'penguin':   { emoji: '🐧', art: '   (o)\n  /| |\\\n _| | |_', sound: 'Waddle waddle!' },
+  'lion':      { emoji: '🦁', art: '  /----- \\\n /  o   o  \\\n|    <>    |\n \\  ____  /\n  \\ \\  / /', sound: 'ROARRR!' },
 };
 
 const vehicles = {
-  'vliegtuig':  { emoji: '✈️', art: '         __|__\n  --o--o--(_)--o--o--', sound: 'SWOOOESH!' },
-  'vragmotor':  { emoji: '🚛', art: '    ___________\n   |  _  _  _  |___\n   | VRAGMOTOR! |   |\n   |___________|___|\n    (O)         (O)', sound: 'VROOM VROOM!' },
-  'skopraaf':   { emoji: '🏗️', art: '     ___\n    /   \\-----.\n   |  O  |     \\\n    \\___/  _   |\n   [XXXXX]|_|_/', sound: 'GRAWE GRAWE!' },
-  'vuurpyl':    { emoji: '🚀', art: '      /\\\n     /  \\\n    | 🚀 |\n    |    |\n   /|    |\\\n   🔥🔥🔥', sound: '3... 2... 1... OPSTYG!' },
-  'trein':      { emoji: '🚂', art: '   __    __    __\n  |==|  |==|  |==|\n __|  |__|  |__|  |__\n|   TJOE TJOE!      |\n|___________________|\n  (O)    (O)    (O)', sound: 'TJOE TJOE!' },
-  'helikopter': { emoji: '🚁', art: '   ---+---\n      |\n   .--\'--.\n  / o   o \\\n  \\_______/', sound: 'WHOP WHOP WHOP!' },
-  'skraper':    { emoji: '🚜', art: '  _________\n |  STOOT!  |____\n |_________|    |\n   (O)     (O)', sound: 'BIEP BIEP BIEP!' },
-  'hyskraan':   { emoji: '🏗️', art: '   |\n   |______\n   |      \\---[HAAK]\n   | KRAAN |\n   |______|', sound: 'HYS!' },
-  'boot':       { emoji: '⛵', art: '      |\n     /|\\\n    / | \\\n ~~~~~~~~~~~', sound: 'Splashhh!' },
-  'motor':      { emoji: '🚗', art: '    ______\n   /|_||_\\`.__\n  (   _    _ _\\\n  =`-(_)--(_)-\'', sound: 'Toet toet!' },
-  'bus':        { emoji: '🚌', art: '  ______________\n |  BUS!  [] [] |\n |_____________|\n   (O)      (O)', sound: 'Almal in!' },
+  'airplane':    { emoji: '✈️', art: '         __|__\n  --o--o--(_)--o--o--', sound: 'WHOOOOSH!' },
+  'plane':       { emoji: '✈️', art: '         __|__\n  --o--o--(_)--o--o--', sound: 'WHOOOOSH!' },
+  'truck':       { emoji: '🚛', art: '    ___________\n   |  _  _  _  |___\n   |  TRUCK!   |   |\n   |___________|___|\n    (O)         (O)', sound: 'VROOM VROOM!' },
+  'excavator':   { emoji: '🏗️', art: '     ___\n    /   \\-----.\n   |  O  |     \\\n    \\___/  _   |\n   [XXXXX]|_|_/', sound: 'DIG DIG DIG!' },
+  'rocket':      { emoji: '🚀', art: '      /\\\n     /  \\\n    | 🚀 |\n    |    |\n   /|    |\\\n   🔥🔥🔥', sound: '3... 2... 1... BLAST OFF!' },
+  'train':       { emoji: '🚂', art: '   __    __    __\n  |==|  |==|  |==|\n __|  |__|  |__|  |__\n|   CHOO CHOO!      |\n|___________________|\n  (O)    (O)    (O)', sound: 'CHOO CHOO!' },
+  'helicopter':  { emoji: '🚁', art: '   ---+---\n      |\n   .--\'--.\n  / o   o \\\n  \\_______/', sound: 'WHOP WHOP WHOP!' },
+  'bulldozer':   { emoji: '🚜', art: '  _________\n |  PUSH!  |____\n |_________|    |\n   (O)     (O)', sound: 'BEEP BEEP BEEP!' },
+  'crane':       { emoji: '🏗️', art: '   |\n   |______\n   |      \\---[HOOK]\n   | CRANE|\n   |______|', sound: 'LIFTING!' },
+  'boat':        { emoji: '⛵', art: '      |\n     /|\\\n    / | \\\n ~~~~~~~~~~~', sound: 'Splashhh!' },
+  'car':         { emoji: '🚗', art: '    ______\n   /|_||_\\`.__\n  (   _    _ _\\\n  =`-(_)--(_)-\'', sound: 'Beep beep!' },
+  'bus':         { emoji: '🚌', art: '  ______________\n |  BUS!  [] [] |\n |_____________|\n   (O)      (O)', sound: 'All aboard!' },
 };
 
 const colors = {
-  'rooi':   { emoji: '🔴', things: '🍎 🚒 🌹 ❤️ 🍓' },
-  'blou':   { emoji: '🔵', things: '🌊 🦋 🫐 💎 🐳' },
-  'groen':  { emoji: '🟢', things: '🌿 🐸 🥒 🌲 🐢' },
-  'geel':   { emoji: '🟡', things: '⭐ 🌻 🍋 🐤 ☀️' },
-  'oranje': { emoji: '🟠', things: '🍊 🥕 🦊 🎃 🏀' },
-  'pers':   { emoji: '🟣', things: '🍇 🦄 🔮 👾 🌸' },
-  'pienk':  { emoji: '💗', things: '🌸 🦩 🍧 💝 🎀' },
-  'swart':  { emoji: '⚫', things: '🐈‍⬛ 🕷️ 🌑 🎱 🦇' },
-  'wit':    { emoji: '⚪', things: '☁️ ⛄ 🕊️ 🥚 🦢' },
-  'bruin':  { emoji: '🟤', things: '🐻 🍫 🌰 🐿️ 🏈' },
+  'red':    { emoji: '🔴', things: '🍎 🚒 🌹 ❤️ 🍓' },
+  'blue':   { emoji: '🔵', things: '🌊 🦋 🫐 💎 🐳' },
+  'green':  { emoji: '🟢', things: '🌿 🐸 🥒 🌲 🐢' },
+  'yellow': { emoji: '🟡', things: '⭐ 🌻 🍋 🐤 ☀️' },
+  'orange': { emoji: '🟠', things: '🍊 🥕 🦊 🎃 🏀' },
+  'purple': { emoji: '🟣', things: '🍇 🦄 🔮 👾 🌸' },
+  'pink':   { emoji: '💗', things: '🌸 🦩 🍧 💝 🎀' },
+  'black':  { emoji: '⚫', things: '🐈‍⬛ 🕷️ 🌑 🎱 🦇' },
+  'white':  { emoji: '⚪', things: '☁️ ⛄ 🕊️ 🥚 🦢' },
+  'brown':  { emoji: '🟤', things: '🐻 🍫 🌰 🐿️ 🏈' },
 };
 
 const letterAnimals = {
-  'a':'🐵', // aap
-  'b':'🐐', // bok
-  'c':'🦜', // chris kaketoe
-  'd':'🫏', // donkie
-  'e':'🐿️', // eekhoring
-  'f':'🦩', // flamink
-  'g':'🪿', // gaans
-  'h':'🐇', // haas
-  'i':'🦎', // ietermagog
-  'j':'🦊', // jakkals
-  'k':'🐨', // koala
-  'l':'🦁', // leeu
-  'm':'🐭', // muis
-  'n':'🐒', // nagapie
-  'o':'🐘', // olifant
-  'p':'🐸', // padda
-  'q':'🐦', // quinton kwartel
-  'r':'🦏', // renoster
-  's':'🐍', // slang
-  't':'🐯', // tier
-  'u':'🦉', // uil
-  'v':'🐦', // voël
-  'w':'🐋', // walvis
-  'x':'🐠', // x-straalvis
-  'y':'🐻‍❄️', // ysbeer
-  'z':'🦓', // zebra
+  'a':'🐊','b':'🦋','c':'🐱','d':'🐶','e':'🐘','f':'🐸','g':'🦒','h':'🐴',
+  'i':'🦎','j':'🪼','k':'🦘','l':'🦁','m':'🐵','n':'🦑','o':'🦉','p':'🐧',
+  'q':'👸','r':'🐰','s':'🐍','t':'🐢','u':'🦄','v':'🌋','w':'🐋','x':'🎸',
+  'y':'🪀','z':'🦓',
 };
 
 const numberComparisons = {
-  20: "Dit is hoeveel vingers EN tone jy het! 🖐️🦶",
-  50: "Dit is die helfte van honderd! 🪙",
-  100: "Dit is hoeveel tone 10 mense het! 🦶×10",
-  365: "Dit is hoeveel dae in 'n jaar! 📅",
-  999: "Amper 'n DUISEND! 😱",
+  20: "That's how many fingers AND toes you have! 🖐️🦶",
+  50: "That's a half dollar! 🪙",
+  100: "That's how many toes 10 people have! 🦶×10",
+  365: "That's how many days in a year! 📅",
+  999: "Almost a THOUSAND! 😱",
 };
 
 const challenges = [
-  { prompt: '🐱', answer: 'kat', hint: 'watter dier is dit?' },
-  { prompt: '🐶', answer: 'hond', hint: 'watter dier is dit?' },
-  { prompt: '🐸', answer: 'padda', hint: 'watter dier is dit?' },
-  { prompt: '🐍', answer: 'slang', hint: 'watter dier is dit?' },
-  { prompt: '🦞', answer: 'kreef', hint: 'watter dier is dit?' },
-  { prompt: '🚀', answer: 'vuurpyl', hint: 'wat is dit?' },
-  { prompt: '✈️', answer: 'vliegtuig', hint: 'wat is dit?' },
-  { prompt: '🚛', answer: 'vragmotor', hint: 'wat is dit?' },
-  { prompt: '🔴', answer: 'rooi', hint: 'watter kleur?' },
-  { prompt: '🔵', answer: 'blou', hint: 'watter kleur?' },
-  { prompt: '🟢', answer: 'groen', hint: 'watter kleur?' },
-  { prompt: '🟡', answer: 'geel', hint: 'watter kleur?' },
-  { prompt: '⚫', answer: 'swart', hint: 'watter kleur?' },
-  { prompt: '🟤', answer: 'bruin', hint: 'watter kleur?' },
-  { prompt: '🐟🐟🐟', answer: '3', hint: 'hoeveel visse?' },
-  { prompt: '⭐⭐⭐⭐⭐', answer: '5', hint: 'hoeveel sterre?' },
-  { prompt: '🍎🍎', answer: '2', hint: 'hoeveel appels?' },
+  { prompt: '🐱', answer: 'cat', hint: 'what animal is this?' },
+  { prompt: '🐶', answer: 'dog', hint: 'what animal is this?' },
+  { prompt: '🐸', answer: 'frog', hint: 'what animal is this?' },
+  { prompt: '🐍', answer: 'snake', hint: 'what animal is this?' },
+  { prompt: '🦞', answer: 'lobster', hint: 'what animal is this?' },
+  { prompt: '🚀', answer: 'rocket', hint: 'what is this?' },
+  { prompt: '✈️', answer: ['airplane','plane'], hint: 'what is this?' },
+  { prompt: '🚛', answer: 'truck', hint: 'what is this?' },
+  { prompt: '🔴', answer: 'red', hint: 'what color?' },
+  { prompt: '🔵', answer: 'blue', hint: 'what color?' },
+  { prompt: '🟢', answer: 'green', hint: 'what color?' },
+  { prompt: '🟡', answer: 'yellow', hint: 'what color?' },
+  { prompt: '🐟🐟🐟', answer: '3', hint: 'how many fish?' },
+  { prompt: '⭐⭐⭐⭐⭐', answer: '5', hint: 'how many stars?' },
+  { prompt: '🍎🍎', answer: '2', hint: 'how many apples?' },
 ];
 
 function makeCreature(letters) {
@@ -374,9 +353,9 @@ async function countUpAnimation(target) {
 
 function isKnownWord(lower) {
   return animals[lower] || vehicles[lower] || colors[lower] ||
-    ['hulp','grap','grappe','snaaks','grappig','dans','partytjie','magie','abracadabra','alakazam','shazam','presto','towenaar',
-     'reënboog','reenboog','robot','biep','maan','son','ster','sterre','skoon','cls','hallo','hey',
-     'diere','kleure','voertuie','letters','nommers'].includes(lower);
+    ['help','joke','jokes','funny','dance','party','magic','abracadabra','alakazam','shazam','presto','wizard','spell',
+     'rainbow','robot','beep','moon','sun','star','stars','clear','cls','hi','hello','hey',
+     'animals','colors','colours','vehicles','cars','trucks','letters','numbers'].includes(lower);
 }
 
 function isGibberish(text) {
@@ -391,7 +370,7 @@ function isGibberish(text) {
 
 const gibberishResponses = [
   (text) => ({ text: randomEmoji(12 + Math.floor(Math.random() * 8)), cls: 'emoji-flood celebration' }),
-  (text) => ({ text: `<pre class="creature-art">${makeCreature(text)}</pre>jou letters het 'n skepsel gemaak!`, cls: 'magic celebration' }),
+  (text) => ({ text: `<pre class="creature-art">${makeCreature(text)}</pre>your letters made a creature!`, cls: 'magic celebration' }),
   (text) => {
     const n = text.length;
     const emoji = allEmoji[Math.floor(Math.random() * allEmoji.length)];
@@ -404,7 +383,7 @@ const gibberishResponses = [
   },
   (text) => {
     const reversed = text.split('').reverse().join('');
-    return { text: `🪞 agteruit: <span class="rainbow">${reversed}</span>`, cls: 'magic celebration' };
+    return { text: `🪞 backwards: <span class="rainbow">${reversed}</span>`, cls: 'magic celebration' };
   },
   (text) => {
     const exploded = text.split('').map(c => c + allEmoji[Math.floor(Math.random() * allEmoji.length)]).join('');
@@ -414,20 +393,20 @@ const gibberishResponses = [
     const vertical = text.split('').join('\n');
     return { text: `<pre>${vertical}</pre>`, cls: 'magic celebration' };
   },
-  (text) => ({ text: `🤖 die rekenaar het probeer om "${text}" te sê maar het verwar geraak! 🤯💫`, cls: 'peach celebration' }),
+  (text) => ({ text: `🤖 the computer tried to say "${text}" but got confused! 🤯💫`, cls: 'peach celebration' }),
   (text) => {
     const code = text.split('').map(c => String.fromCharCode(c.charCodeAt(0) + 1)).join('');
-    return { text: `🔐 geheime kode: <span class="rainbow">${code}</span>`, cls: 'magic celebration' };
+    return { text: `🔐 secret code: <span class="rainbow">${code}</span>`, cls: 'magic celebration' };
   },
   (text) => {
     const facts = [
-      '🦕 Dinosourusse het 165 miljoen jaar geleef!',
-      '🐙 Seekatte het DRIE harte!',
-      '🍯 Heuning bederf nooit nie — ooit!',
-      '🌙 Die maan beweeg stadig weg van die Aarde af!',
-      '🐘 Olifante kan nie spring nie!',
-      '🦈 Haaie is ouer as bome!',
-      '🐝 \'n By besoek 50-100 blomme op een uitstappie!',
+      '🦕 Dinosaurs lived for 165 million years!',
+      '🐙 Octopuses have THREE hearts!',
+      '🍯 Honey never goes bad — ever!',
+      '🌙 The moon is slowly drifting away from Earth!',
+      '🐘 Elephants can\'t jump!',
+      '🦈 Sharks are older than trees!',
+      '🐝 A bee visits 50-100 flowers in one trip!',
     ];
     return { text: facts[Math.floor(Math.random() * facts.length)], cls: 'info celebration' };
   },
@@ -441,9 +420,9 @@ const gibberishResponses = [
 async function handleCommand(raw) {
   const text = raw.trim();
   const lower = text.toLowerCase();
-  addLine('tik hier&gt;&nbsp;', text);
+  addLine('type here&gt;&nbsp;', text);
 
-  if (!text) { addOutput('tik iets! 🎯', 'info'); scrollToBottom(); return; }
+  if (!text) { addOutput('type something! 🎯', 'info'); scrollToBottom(); return; }
 
   if (pendingChallenge) {
     const c = pendingChallenge;
@@ -451,7 +430,7 @@ async function handleCommand(raw) {
     if (answers.includes(lower)) {
       pendingChallenge = null;
       gibberishCount = 0;
-      addOutput(`<span class="rainbow giant">JA! ✨🎉✨</span>`, 'celebration');
+      addOutput(`<span class="rainbow giant">YES! ✨🎉✨</span>`, 'celebration');
       scrollToBottom();
     } else {
       pendingChallenge = null;
@@ -472,7 +451,7 @@ async function handleCommand(raw) {
     gibberishCount = 0;
     const n = parseInt(text);
     if (n >= 1000) {
-      addOutput(`tel tot ${n.toLocaleString()}...`, 'magic');
+      addOutput(`counting to ${n.toLocaleString()}...`, 'magic');
       await countUpAnimation(n);
       scrollToBottom(); return;
     }
@@ -519,54 +498,54 @@ async function handleCommand(raw) {
     scrollToBottom(); return;
   }
 
-  if (['hallo','hey'].includes(lower)) { gibberishCount = 0; addOutput('👋 hallo! 🖥️✨', 'success celebration'); scrollToBottom(); return; }
+  if (['hello','hi','hey'].includes(lower)) { gibberishCount = 0; addOutput('👋 hello! 🖥️✨', 'success celebration'); scrollToBottom(); return; }
 
-  if (lower === 'hulp') {
+  if (lower === 'help') {
     gibberishCount = 0;
-    addOutput('🐾 diere: kat, hond, haai, dinosaurus...', 'teal');
-    addOutput('🚗 voertuie: vliegtuig, vragmotor, vuurpyl...', 'peach');
-    addOutput('🎨 kleure: rooi, blou, groen...', 'pink');
+    addOutput('🐾 animals: cat, dog, shark, dinosaur...', 'teal');
+    addOutput('🚗 vehicles: airplane, truck, rocket...', 'peach');
+    addOutput('🎨 colors: red, blue, green...', 'pink');
     addOutput('🔤 letters: a, b, c...', 'success');
-    addOutput('🔢 nommers: 1, 2, 1000...', 'magic');
+    addOutput('🔢 numbers: 1, 2, 1000...', 'magic');
     scrollToBottom(); return;
   }
 
-  if (['grap','grappe','snaaks','grappig'].includes(lower)) {
+  if (['joke','jokes','funny'].includes(lower)) {
     gibberishCount = 0;
     const jokes = [
-      '🤣 Hoekom het die rekenaar gesnees?\nDit het \'n virus gehad!',
-      '🤣 Wat noem jy \'n slapende dinosaurus?\n\'n Dino-SNORK! 🦕💤',
-      '🤣 Hoekom is die piesang na die dokter toe?\nDit het nie lekker ge-SKIL nie! 🍌',
-      '🤣 Wat noem jy \'n vis sonder oë?\n\'n Vs! 🐟',
-      '🤣 Wat noem jy \'n beer sonder tande?\n\'n Gomleer! 🐻🍬',
-      '🤣 Wat sê die een muur vir die ander?\nEk sal jou by die hoek ontmoet! 🧱',
+      '🤣 Why did the computer sneeze?\nIt had a virus!',
+      '🤣 What do you call a sleeping dinosaur?\nA dino-SNORE! 🦕💤',
+      '🤣 Why did the banana go to the doctor?\nIt wasn\'t PEELING well! 🍌',
+      '🤣 What do you call a fish without eyes?\nA fsh! 🐟',
+      '🤣 What do you call a bear with no teeth?\nA gummy bear! 🐻🍬',
+      '🤣 What does a cat say on Christmas?\nMeowy Christmas! 🐱🎄',
     ];
     addOutput(jokes[Math.floor(Math.random() * jokes.length)].replace('\n','<br>'), 'peach celebration');
     scrollToBottom(); return;
   }
 
-  if (['magie','abracadabra','alakazam','shazam','presto','towenaar'].includes(lower)) {
+  if (['magic','abracadabra','alakazam','shazam','presto','wizard','spell'].includes(lower)) {
     gibberishCount = 0; addOutput('✨🔮💫⭐🌟✨🔮💫⭐🌟✨', 'magic celebration'); scrollToBottom(); return;
   }
 
-  if (lower === 'dans' || lower === 'partytjie') { gibberishCount = 0; addOutput('🕺💃🪩🎵🎶🕺💃🪩🎵🎶', 'magic celebration'); scrollToBottom(); return; }
-  if (lower === 'reënboog' || lower === 'reenboog') { gibberishCount = 0; addOutput('<span class="rainbow giant">REËNBOOG!</span>', 'celebration'); addOutput('🔴🟠🟡🟢🔵🟣', 'celebration'); scrollToBottom(); return; }
-  if (lower === 'robot' || lower === 'biep') { gibberishCount = 0; addOutput('🤖 BIEP BUUP!', 'teal celebration'); addOutput('<pre>  [o_o]\n  /| |\\\n   | |\n  _|_|_</pre>', 'art'); scrollToBottom(); return; }
-  if (lower === 'maan') { gibberishCount = 0; addOutput('<span class="emoji-big">🌙🌜🌛🌝</span>', 'celebration'); scrollToBottom(); return; }
-  if (lower === 'son') { gibberishCount = 0; addOutput('<span class="emoji-big">☀️🌞☀️🌞</span>', 'celebration'); scrollToBottom(); return; }
-  if (lower === 'ster' || lower === 'sterre') { gibberishCount = 0; addOutput('<span class="emoji-big">⭐🌟✨💫⭐🌟✨</span>', 'celebration'); scrollToBottom(); return; }
+  if (lower === 'dance' || lower === 'party') { gibberishCount = 0; addOutput('🕺💃🪩🎵🎶🕺💃🪩🎵🎶', 'magic celebration'); scrollToBottom(); return; }
+  if (lower === 'rainbow') { gibberishCount = 0; addOutput('<span class="rainbow giant">RAINBOW!</span>', 'celebration'); addOutput('🔴🟠🟡🟢🔵🟣', 'celebration'); scrollToBottom(); return; }
+  if (lower === 'robot' || lower === 'beep') { gibberishCount = 0; addOutput('🤖 BEEP BOOP!', 'teal celebration'); addOutput('<pre>  [o_o]\n  /| |\\\n   | |\n  _|_|_</pre>', 'art'); scrollToBottom(); return; }
+  if (lower === 'moon') { gibberishCount = 0; addOutput('<span class="emoji-big">🌙🌜🌛🌝</span>', 'celebration'); scrollToBottom(); return; }
+  if (lower === 'sun') { gibberishCount = 0; addOutput('<span class="emoji-big">☀️🌞☀️🌞</span>', 'celebration'); scrollToBottom(); return; }
+  if (lower === 'star' || lower === 'stars') { gibberishCount = 0; addOutput('<span class="emoji-big">⭐🌟✨💫⭐🌟✨</span>', 'celebration'); scrollToBottom(); return; }
 
-  if (lower === 'diere') { gibberishCount = 0; addOutput(Object.keys(animals).map(a => `${animals[a].emoji} ${a}`).join('  '), 'teal'); scrollToBottom(); return; }
-  if (lower === 'voertuie') { gibberishCount = 0; addOutput(Object.keys(vehicles).map(v => `${vehicles[v].emoji} ${v}`).join('  '), 'peach'); scrollToBottom(); return; }
-  if (lower === 'kleure') { gibberishCount = 0; addOutput(Object.keys(colors).map(c => `${colors[c].emoji} ${c}`).join('  '), 'pink'); scrollToBottom(); return; }
+  if (lower === 'animals') { gibberishCount = 0; addOutput(Object.keys(animals).map(a => `${animals[a].emoji} ${a}`).join('  '), 'teal'); scrollToBottom(); return; }
+  if (['vehicles','cars','trucks'].includes(lower)) { gibberishCount = 0; addOutput(Object.keys(vehicles).map(v => `${vehicles[v].emoji} ${v}`).join('  '), 'peach'); scrollToBottom(); return; }
+  if (['colors','colours'].includes(lower)) { gibberishCount = 0; addOutput(Object.keys(colors).map(c => `${colors[c].emoji} ${c}`).join('  '), 'pink'); scrollToBottom(); return; }
   if (lower === 'letters') { gibberishCount = 0; addOutput('<span class="rainbow giant">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</span>', 'celebration'); scrollToBottom(); return; }
-  if (lower === 'nommers') { gibberishCount = 0; addOutput('0️⃣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟', 'celebration'); scrollToBottom(); return; }
-  if (lower === 'skoon' || lower === 'cls') { terminal.innerHTML = ''; addOutput('✨', 'success'); scrollToBottom(); return; }
+  if (lower === 'numbers') { gibberishCount = 0; addOutput('0️⃣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟', 'celebration'); scrollToBottom(); return; }
+  if (lower === 'clear' || lower === 'cls') { terminal.innerHTML = ''; addOutput('✨', 'success'); scrollToBottom(); return; }
 
-  if (lower.startsWith('ek is ') || lower.startsWith('my naam is ')) {
+  if (lower.startsWith('i am ') || lower.startsWith('my name is ')) {
     gibberishCount = 0;
-    const name = lower.replace(/^(ek is |my naam is )/, '').trim();
-    addOutput(`<span class="rainbow giant">HALLO ${name.toUpperCase()}!</span> ✨`, 'celebration');
+    const name = lower.replace(/^(i am |my name is )/, '').trim();
+    addOutput(`<span class="rainbow giant">HI ${name.toUpperCase()}!</span> ✨`, 'celebration');
     scrollToBottom(); return;
   }
 
@@ -592,7 +571,7 @@ window._showWelcome();
 // Create input line inside terminal (after welcome so innerHTML doesn't destroy it)
 const inputLine = document.createElement('div');
 inputLine.className = 'input-line';
-inputLine.innerHTML = '<span class="prompt">tik hier&gt;&nbsp;</span>';
+inputLine.innerHTML = '<span class="prompt">type here&gt;&nbsp;</span>';
 const inputEl = document.createElement('textarea');
 inputEl.id = 'input';
 inputEl.autocomplete = 'off';
