@@ -413,16 +413,15 @@ const gibberishResponses = [
     const vertical = text.split('').join('\n');
     return { text: `<pre>${vertical}</pre>`, cls: 'magic celebration' };
   },
-  (text) => ({ text: `🤖 die rekenaar het probeer om "${text}" te sê maar het verwar geraak! 🤯💫`, cls: 'peach celebration' }),
+  (text) => ({ text: `🤖 die rekenaar het probeer om "${text}" te sê maar het deurmekaar geraak! 🤯💫`, cls: 'peach celebration' }),
   (text) => {
     const code = text.split('').map(c => String.fromCharCode(c.charCodeAt(0) + 1)).join('');
     return { text: `🔐 geheime kode: <span class="rainbow">${code}</span>`, cls: 'magic celebration' };
   },
   (text) => {
     const facts = [
-      '🦕 Dinosourusse het 165 miljoen jaar geleef!',
       '🐙 Seekatte het DRIE harte!',
-      '🍯 Heuning bederf nooit nie — ooit!',
+      '🍯 Heuning bederf nooit nie!',
       '🌙 Die maan beweeg stadig weg van die Aarde af!',
       '🐘 Olifante kan nie spring nie!',
       '🦈 Haaie is ouer as bome!',
@@ -442,7 +441,7 @@ async function handleCommand(raw) {
   const lower = text.toLowerCase();
   addLine('tik hier&gt;&nbsp;', text);
 
-  if (!text) { addOutput('tik iets! 🎯', 'info'); scrollToBottom(); return; }
+  if (!text) { addOutput('tik iets of vra vir hulp! 🎯', 'info'); scrollToBottom(); return; }
 
   if (pendingChallenge) {
     const c = pendingChallenge;
@@ -527,7 +526,7 @@ async function handleCommand(raw) {
     addOutput('🎨 kleure: rooi, blou, groen...', 'pink');
     addOutput('🔤 letters: a, b, c...', 'success');
     addOutput('🔢 nommers: 1, 2, 1000...', 'magic');
-    addOutput('✨ ander: dans, grappie, reënboog, robot...', 'art');
+    addOutput('✨ ander: dans, grappie, reënboog, robot...', 'yellow');
     scrollToBottom(); return;
   }
 
