@@ -227,11 +227,10 @@ const animals = {
 const vehicles = {
   'vliegtuig':  { emoji: '✈️', art: '         __|__\n  --o--o--(_)--o--o--', sound: 'SWOOOESH!' },
   'vragmotor':  { emoji: '🚛', art: '    ___________\n   |  _  _  _  |___\n   | VRAGMOTOR! |   |\n   |___________|___|\n    (O)         (O)', sound: 'VROOM VROOM!' },
-  'skopraaf':   { emoji: '🏗️', art: '     ___\n    /   \\-----.\n   |  O  |     \\\n    \\___/  _   |\n   [XXXXX]|_|_/', sound: 'GRAWE GRAWE!' },
   'vuurpyl':    { emoji: '🚀', art: '      /\\\n     /  \\\n    | 🚀 |\n    |    |\n   /|    |\\\n   🔥🔥🔥', sound: '3... 2... 1... OPSTYG!' },
   'trein':      { emoji: '🚂', art: '   __    __    __\n  |==|  |==|  |==|\n __|  |__|  |__|  |__\n|   TJOE TJOE!      |\n|___________________|\n  (O)    (O)    (O)', sound: 'TJOE TJOE!' },
   'helikopter': { emoji: '🚁', art: '   ---+---\n      |\n   .--\'--.\n  / o   o \\\n  \\_______/', sound: 'WHOP WHOP WHOP!' },
-  'skraper':    { emoji: '🚜', art: '  _________\n |  STOOT!  |____\n |_________|    |\n   (O)     (O)', sound: 'BIEP BIEP BIEP!' },
+  'trekker':    { emoji: '🚜', art: '  _________\n |  TREK!  |____\n |_________|    |\n   (O)     (O)', sound: 'BIEP BIEP BIEP!' },
   'hyskraan':   { emoji: '🏗️', art: '   |\n   |______\n   |      \\---[HAAK]\n   | KRAAN |\n   |______|', sound: 'HYS!' },
   'boot':       { emoji: '⛵', art: '      |\n     /|\\\n    / | \\\n ~~~~~~~~~~~', sound: 'Splashhh!' },
   'motor':      { emoji: '🚗', art: '    ______\n   /|_||_\\`.__\n  (   _    _ _\\\n  =`-(_)--(_)-\'', sound: 'Toet toet!' },
@@ -254,11 +253,11 @@ const colors = {
 const letterAnimals = {
   'a':'🐵', // aap
   'b':'🐐', // bok
-  'c':'🦜', // chris kaketoe
+  'c':'💿', // CD
   'd':'🫏', // donkie
   'e':'🐿️', // eekhoring
   'f':'🦩', // flamink
-  'g':'🪿', // gaans
+  'g':'🪿', // gans
   'h':'🐇', // haas
   'i':'🦎', // ietermagog
   'j':'🦊', // jakkals
@@ -268,14 +267,14 @@ const letterAnimals = {
   'n':'🐒', // nagapie
   'o':'🐘', // olifant
   'p':'🐸', // padda
-  'q':'🐦', // quinton kwartel
+  'q':'🦓', // quagga
   'r':'🦏', // renoster
   's':'🐍', // slang
   't':'🐯', // tier
   'u':'🦉', // uil
   'v':'🐦', // voël
   'w':'🐋', // walvis
-  'x':'🐠', // x-straalvis
+  'x':'🩻', // x-straal
   'y':'🐻‍❄️', // ysbeer
   'z':'🦓', // zebra
 };
@@ -374,7 +373,7 @@ async function countUpAnimation(target) {
 
 function isKnownWord(lower) {
   return animals[lower] || vehicles[lower] || colors[lower] ||
-    ['hulp','grap','grappe','snaaks','grappig','dans','partytjie','magie','abracadabra','alakazam','shazam','presto','towenaar',
+    ['hulp','grap','grappe','snaaks','grappig','dans','partytjie','toertjie','abracadabra','alakazam','shazam','presto','tower',
      'reënboog','reenboog','robot','biep','maan','son','ster','sterre','skoon','cls','hallo','hey',
      'diere','kleure','voertuie','letters','nommers'].includes(lower);
 }
@@ -521,31 +520,31 @@ async function handleCommand(raw) {
 
   if (['hallo','hey'].includes(lower)) { gibberishCount = 0; addOutput('👋 hallo! 🖥️✨', 'success celebration'); scrollToBottom(); return; }
 
-  if (lower === 'hulp') {
+  if (['hulp','help'].includes(lower)) {
     gibberishCount = 0;
     addOutput('🐾 diere: kat, hond, haai, dinosaurus...', 'teal');
     addOutput('🚗 voertuie: vliegtuig, vragmotor, vuurpyl...', 'peach');
     addOutput('🎨 kleure: rooi, blou, groen...', 'pink');
     addOutput('🔤 letters: a, b, c...', 'success');
     addOutput('🔢 nommers: 1, 2, 1000...', 'magic');
+    addOutput('✨ ander: dans, grappie, reënboog, robot...', 'art');
     scrollToBottom(); return;
   }
 
-  if (['grap','grappe','snaaks','grappig'].includes(lower)) {
+  if (['grap','grappe','snaaks','grappie'].includes(lower)) {
     gibberishCount = 0;
     const jokes = [
-      '🤣 Hoekom het die rekenaar gesnees?\nDit het \'n virus gehad!',
-      '🤣 Wat noem jy \'n slapende dinosaurus?\n\'n Dino-SNORK! 🦕💤',
-      '🤣 Hoekom is die piesang na die dokter toe?\nDit het nie lekker ge-SKIL nie! 🍌',
-      '🤣 Wat noem jy \'n vis sonder oë?\n\'n Vs! 🐟',
-      '🤣 Wat noem jy \'n beer sonder tande?\n\'n Gomleer! 🐻🍬',
+      '🤣 Hoekom het die rekenaar gehoes?\nDit het \'n virus gehad!',
+      '🤣 Wat sê die een skilpad vir die ander skilpad?\nHou my dop! 🐢',
+      '🤣 Wat sê die een blesbok vir die ander een?\nBles jou! 🤧',
+      '🤣 Wat se die man vir sy perd?\nHoekom die lang gesig? 🐴',
       '🤣 Wat sê die een muur vir die ander?\nEk sal jou by die hoek ontmoet! 🧱',
     ];
     addOutput(jokes[Math.floor(Math.random() * jokes.length)].replace('\n','<br>'), 'peach celebration');
     scrollToBottom(); return;
   }
 
-  if (['magie','abracadabra','alakazam','shazam','presto','towenaar'].includes(lower)) {
+  if (['toertjie','abracadabra','alakazam','shazam','presto','tower'].includes(lower)) {
     gibberishCount = 0; addOutput('✨🔮💫⭐🌟✨🔮💫⭐🌟✨', 'magic celebration'); scrollToBottom(); return;
   }
 
