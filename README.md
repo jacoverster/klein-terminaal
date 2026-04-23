@@ -1,10 +1,13 @@
-# tiny-terminal
+# klein-terminaal
 
 A fake terminal where kids can type anything and get fun, safe responses. Single HTML file, no dependencies, runs offline.
 
-Live: [tiny-terminal.com](https://tiny-terminal.com)
+Live: [klein-terminaal.web.app](https://klein-terminaal.web.app)
 
-Built by [@meimakes](https://x.com/meimakes)
+This Afrikaans version by [@jacoverster](https://x.com/jacoverster)
+
+Original [tiny-terminal.com](https://tiny-terminal.com) built by [@meimakes](https://x.com/meimakes)
+
 
 
 <img width="946" height="519" alt="image" src="https://github.com/user-attachments/assets/a957eac1-a42c-44b5-96a0-21b5253b4b34" />
