@@ -3,11 +3,12 @@
 		"cleanUrls": true,
 		"public": ".",
 		"ignore": [
-			".firebase/",
+			".firebase/**",
+			".git/**",
 			".gitignore",
 			"firebase-debug.log",
 			"firebase.json",
-			"LICENCE",
+			"LICENSE",
 			"README.md",
 			"og.png",
 			"social-preview.png"
